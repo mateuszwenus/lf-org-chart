@@ -3,12 +3,14 @@ package com.github.mateuszwenus.lf_org_chart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletException;
-import javax.portlet.PortletRequest;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.portlet.ResourceURL;
 import javax.servlet.http.HttpServletRequest;
 
 import com.github.mateuszwenus.lf_org_chart.loaders.ChildrenLoader;
@@ -32,17 +34,27 @@ public class LfOrgChartController extends MVCPortlet {
 		HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(resourceRequest));
 		String resourceId = httpRequest.getParameter("p_p_resource_id");
 		if ("loadChildren".equals(resourceId)) {
-			loadChildren(resourceRequest, httpRequest, out);
+			loadChildren(resourceRequest, resourceResponse, httpRequest, out);
 		}
 		out.flush();
 	}
 
-	private void loadChildren(PortletRequest request, HttpServletRequest httpRequest, PrintWriter out) {
-		String typeStr = httpRequest.getParameter("type");
-		NodeType nodeType = NodeType.valueOf(typeStr);
-		List<Node> nodes = childrenLoader.loadChildren(nodeType, getNodeId(httpRequest), request);
-		log.info("nodes = " + nodes);
-		sendResponse(nodes, out);
+	private void loadChildren(ResourceRequest request, ResourceResponse response, HttpServletRequest httpRequest, PrintWriter out) {
+		String ppId = httpRequest.getParameter("p_p_id");
+		String uid = httpRequest.getParameter("uid");
+		Long nodeId = getNodeId(httpRequest);
+		NodeType nodeType = getNodeType(httpRequest);
+		if (validateParams(ppId, uid, nodeId, nodeType)) {
+			List<Node> nodes = childrenLoader.loadChildren(nodeType, nodeId, request);
+			String basicURL = createBasicURL(response, ppId);
+			List<AuiNode> auiNodes = new ArrayList<AuiNode>(nodes.size());
+			for (Node node : nodes) {
+				auiNodes.add(new AuiNode(basicURL, uid, node));
+			}
+			sendResponse(auiNodes, out);
+		} else {
+			sendResponse(Collections.<AuiNode>emptyList(), out);
+		}
 	}
 
 	private Long getNodeId(HttpServletRequest httpRequest) {
@@ -57,8 +69,24 @@ public class LfOrgChartController extends MVCPortlet {
 		return result;
 	}
 
-	private void sendResponse(List<Node> nodes, PrintWriter out) {
-		Type typeOfSrc = new TypeToken<List<Node>>() {
+	private NodeType getNodeType(HttpServletRequest httpRequest) {
+		return NodeType.forString(httpRequest.getParameter("type"));
+	}
+
+	private boolean validateParams(String ppId, String uid, Long nodeId, NodeType nodeType) {
+		return true; // TODO
+	}
+	
+	private String createBasicURL(ResourceResponse response, String ppId) {
+		ResourceURL resURL = response.createResourceURL();
+		String basicURL = resURL.toString();
+		basicURL = basicURL.substring(0, basicURL.indexOf('?'));
+		basicURL += "?p_p_id=" + ppId + "&p_p_resource_id=loadChildren&p_p_lifecycle=2";
+		return basicURL;
+	}
+
+	private void sendResponse(List<AuiNode> nodes, PrintWriter out) {
+		Type typeOfSrc = new TypeToken<List<AuiNode>>() {
 		}.getType();
 		String json = gson.toJson(nodes, typeOfSrc);
 		out.write(json);

@@ -16,7 +16,7 @@ interface Transformations {
 			if (input == null) {
 				return null;
 			}
-			return Node.create(input.getName(), NodeType.COMMUNITY, input.getPrimaryKey());
+			return Node.create(input.getPrimaryKey(), input.getName(), NodeType.COMMUNITY);
 		}
 	};
 
@@ -25,7 +25,7 @@ interface Transformations {
 			if (input == null) {
 				return null;
 			}
-			return Node.create(input.getName(), NodeType.ORGANISATION, input.getPrimaryKey());
+			return Node.create(input.getPrimaryKey(), input.getName(), NodeType.ORGANISATION);
 		}
 	};
 
@@ -34,7 +34,7 @@ interface Transformations {
 			if (input == null) {
 				return null;
 			}
-			return Node.create(input.getName(), NodeType.USER_GROUP, input.getPrimaryKey());
+			return Node.create(input.getPrimaryKey(), input.getName(), NodeType.USER_GROUP);
 		}
 	};
 
@@ -43,7 +43,7 @@ interface Transformations {
 			if (input == null) {
 				return null;
 			}
-			return Node.create(input.getName(), NodeType.TEAM, input.getPrimaryKey());
+			return Node.create(input.getPrimaryKey(), input.getName(), NodeType.TEAM);
 		}
 	};
 
@@ -52,7 +52,7 @@ interface Transformations {
 			if (input == null) {
 				return null;
 			}
-			return Node.create(input.getFullName(), NodeType.USER, input.getPrimaryKey());
+			return Node.create(input.getPrimaryKey(), input.getFullName(), NodeType.USER);
 		}
 	};
 }

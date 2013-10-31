@@ -13,4 +13,13 @@ public enum NodeType {
 	public boolean isIdRequired() {
 		return idRequired;
 	}
+	
+	public static NodeType forString(String str) {
+		for (NodeType type : values()) {
+			if (type.toString().equals(str)) {
+				return type;
+			}
+		}
+		return null;
+	}
 }
