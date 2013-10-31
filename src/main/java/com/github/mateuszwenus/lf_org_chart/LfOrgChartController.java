@@ -16,14 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import com.github.mateuszwenus.lf_org_chart.loaders.ChildrenLoader;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 public class LfOrgChartController extends MVCPortlet {
-
-	private final Log log = LogFactoryUtil.getLog(getClass());
 
 	private final Gson gson = new Gson();
 	private final ChildrenLoader childrenLoader = new ChildrenLoader();
@@ -53,7 +49,7 @@ public class LfOrgChartController extends MVCPortlet {
 			}
 			sendResponse(auiNodes, out);
 		} else {
-			sendResponse(Collections.<AuiNode>emptyList(), out);
+			sendResponse(Collections.<AuiNode> emptyList(), out);
 		}
 	}
 
@@ -76,7 +72,7 @@ public class LfOrgChartController extends MVCPortlet {
 	private boolean validateParams(String ppId, String uid, Long nodeId, NodeType nodeType) {
 		return true; // TODO
 	}
-	
+
 	private String createBasicURL(ResourceResponse response, String ppId) {
 		ResourceURL resURL = response.createResourceURL();
 		String basicURL = resURL.toString();
