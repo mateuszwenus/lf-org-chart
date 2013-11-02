@@ -3,14 +3,12 @@ package com.github.mateuszwenus.lf_org_chart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.portlet.ResourceURL;
 import javax.servlet.http.HttpServletRequest;
 
 import com.github.mateuszwenus.lf_org_chart.loaders.ChildrenLoader;
@@ -36,20 +34,14 @@ public class LfOrgChartController extends MVCPortlet {
 	}
 
 	private void loadChildren(ResourceRequest request, ResourceResponse response, HttpServletRequest httpRequest, PrintWriter out) {
-		String ppId = httpRequest.getParameter("p_p_id");
 		String uid = httpRequest.getParameter("uid");
 		Long nodeId = getNodeId(httpRequest);
 		NodeType nodeType = getNodeType(httpRequest);
-		if (validateParams(ppId, uid, nodeId, nodeType)) {
+		if (validateParams(uid, nodeId, nodeType)) {
 			List<Node> nodes = childrenLoader.loadChildren(nodeType, nodeId, request);
-			String basicURL = createBasicURL(response, ppId);
-			List<AuiNode> auiNodes = new ArrayList<AuiNode>(nodes.size());
-			for (Node node : nodes) {
-				auiNodes.add(new AuiNode(basicURL, uid, node));
-			}
-			sendResponse(auiNodes, out);
+			sendResponse(nodes, out);
 		} else {
-			sendResponse(Collections.<AuiNode> emptyList(), out);
+			sendResponse(Collections.<Node> emptyList(), out);
 		}
 	}
 
@@ -69,20 +61,12 @@ public class LfOrgChartController extends MVCPortlet {
 		return NodeType.forString(httpRequest.getParameter("type"));
 	}
 
-	private boolean validateParams(String ppId, String uid, Long nodeId, NodeType nodeType) {
+	private boolean validateParams(String uid, Long nodeId, NodeType nodeType) {
 		return true; // TODO
 	}
-
-	private String createBasicURL(ResourceResponse response, String ppId) {
-		ResourceURL resURL = response.createResourceURL();
-		String basicURL = resURL.toString();
-		basicURL = basicURL.substring(0, basicURL.indexOf('?'));
-		basicURL += "?p_p_id=" + ppId + "&p_p_resource_id=loadChildren&p_p_lifecycle=2";
-		return basicURL;
-	}
-
-	private void sendResponse(List<AuiNode> nodes, PrintWriter out) {
-		Type typeOfSrc = new TypeToken<List<AuiNode>>() {
+	
+	private <T> void sendResponse(List<T> nodes, PrintWriter out) {
+		Type typeOfSrc = new TypeToken<List<T>>() {
 		}.getType();
 		String json = gson.toJson(nodes, typeOfSrc);
 		out.write(json);

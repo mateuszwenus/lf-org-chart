@@ -8,6 +8,7 @@
 	<name>lf-org-chart Portlet</name>
 	<version>1.0-SNAPSHOT</version>
 	<build>
+		<finalName>lf-org-chart</finalName>
 		<plugins>
 			<plugin>
 				<groupId>com.liferay.maven.plugins</groupId>
