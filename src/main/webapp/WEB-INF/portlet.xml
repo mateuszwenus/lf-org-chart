@@ -18,6 +18,9 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
+		<supported-locale>en</supported-locale>
+		<supported-locale>pl</supported-locale>
+		<resource-bundle>msg.Resource</resource-bundle>
 		<portlet-info>
 			<title>lf-org-chart</title>
 			<short-title>lf-org-chart</short-title>
