@@ -18,8 +18,8 @@ public class ChildrenLoader {
 	private EnumMap<NodeType, SingleNodeChildrenLoader> loaders = new EnumMap<NodeType, SingleNodeChildrenLoader>(NodeType.class);
 
 	public ChildrenLoader() {
-		for (SingleNodeChildrenLoader loader : Arrays.asList(new RootCommunitiesChildrenLoader(), new CommunityChildrenLoader(),
-				new OrganisationChildrenLoader(), new TeamChildrenLoader(), new UserGroupChildrenLoader())) {
+		for (SingleNodeChildrenLoader loader : Arrays.asList(new CommunityChildrenLoader(), new OrganisationChildrenLoader(),
+				new TeamChildrenLoader(), new UserGroupChildrenLoader())) {
 			loaders.put(loader.getSupportedNodeType(), loader);
 		}
 	}
@@ -27,7 +27,7 @@ public class ChildrenLoader {
 	public List<Node> loadChildren(NodeType nodeType, Long nodeId, PortletRequest req) {
 		try {
 			Preconditions.checkNotNull(nodeType);
-			Preconditions.checkState(nodeId != null || !nodeType.isIdRequired());
+			Preconditions.checkNotNull(nodeId);
 			SingleNodeChildrenLoader loader = loaders.get(nodeType);
 			return loader != null ? loader.loadChildren(nodeId, req) : Collections.<Node> emptyList();
 		} catch (PortalException e) {

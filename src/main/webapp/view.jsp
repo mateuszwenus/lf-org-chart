@@ -28,57 +28,62 @@
     			$("#<portlet:namespace />nodeDetails").html(data);
     		});
     	};
-
-    	var treeData = {
-    		json_data : {
-    			data : {
-    				"data" : "ROOT_COMMUNITIES",
-    				"attr" : { id : "root", rel : "ROOT_COMMUNITIES"},
-    				"state" : "closed"
-    			},
-    			ajax : {
-    				data : function(data) {
-    					return {
-    						"<portlet:namespace />id" : data.attr("id"),
-    						"<portlet:namespace />type" : data.attr("rel")
-    					};
-    				},
-    				url : function(data) {
-    					return "<portlet:resourceURL id='loadChildren' />";
-    				}, 
-    				success : function(data) {
-    					return $.map(data, function(item) {
-    						return {
-    							data : item.name,
-    							attr : {
-    								id : item.pk,
-    								rel : item.type
-    							},
-    							state : "closed"
-    						};
-    					});
-    				}
-    			}
-    		},
-    		ui : {
-    			select_limit : 1,
-    			initially_select : []
-    		},
-    		types : {
-    			types : {
-    				ROOT_COMMUNITIES : nodeType("database.png", [ "COMMUNITY" ]), 
-    				COMMUNITY : nodeType("home.png", [ "ORGANISATION", "USER_GROUP", "TEAM", "USER" ]),
-    				ORGANISATION : nodeType("sitemap.png", [ "ORGANISATION", "TEAM", "USER" ]),
-    				USER_GROUP : nodeType("customers.png", [ "USER" ]),
-    				TEAM : nodeType("customers.png", [ "USER" ]),
-    				USER : nodeType("user.png", [])
-    			}
-    		},
-    		plugins : [ "themes", "json_data", "ui", "types" ]
+    	
+    	var transformResponse = function(data) {
+    		return $.map(data, function(item) {
+				return {
+					data : item.name,
+					attr : {
+						id : item.pk,
+						rel : item.type
+					},
+					state : "closed"
+				};
+			});
     	};
-    	$("#<portlet:namespace />tree").jstree(treeData).bind("select_node.jstree", function(e, data) {
-    		showNodeDetails(data.rslt.obj);
+    	
+    	var createTree = function(roots) {
+    		return {
+	    		json_data : {
+	    			data : roots,
+	    			ajax : {
+	    				data : function(data) {
+	    					return {
+	    						"<portlet:namespace />id" : data.attr("id"),
+	    						"<portlet:namespace />type" : data.attr("rel")
+	    					};
+	    				},
+	    				url : function(data) {
+	    					return "<portlet:resourceURL id='loadChildren' />";
+	    				}, 
+	    				success : transformResponse
+	    			}
+	    		},
+	    		ui : {
+	    			select_limit : 1,
+	    			initially_select : []
+	    		},
+	    		types : {
+	    			types : {
+	    				ROOT_COMMUNITIES : nodeType("database.png", [ "COMMUNITY" ]), 
+	    				COMMUNITY : nodeType("home.png", [ "ORGANISATION", "USER_GROUP", "TEAM", "USER" ]),
+	    				ORGANISATION : nodeType("sitemap.png", [ "ORGANISATION", "TEAM", "USER" ]),
+	    				USER_GROUP : nodeType("customers.png", [ "USER" ]),
+	    				TEAM : nodeType("customers.png", [ "USER" ]),
+	    				USER : nodeType("user.png", [])
+	    			}
+	    		},
+	    		plugins : [ "themes", "json_data", "ui", "types" ]
+	    	};
+    	};
+    	
+    	$.post("<portlet:resourceURL id='loadRoots' />", function(data) {
+	    	var treeData = createTree(transformResponse(data));
+	    	$("#<portlet:namespace />tree").jstree(treeData).bind("select_node.jstree", function(e, data) {
+	    		showNodeDetails(data.rslt.obj);
+	    	});
     	});
+
     });
     $.noConflict(true);
     </script>
