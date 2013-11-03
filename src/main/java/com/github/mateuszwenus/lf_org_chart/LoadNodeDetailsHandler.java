@@ -41,8 +41,8 @@ public class LoadNodeDetailsHandler {
 	}
 
 	private void addNodeDetailsAsAttributes(long id, NodeType type, HttpServletRequest httpRequest) {
-		Map<String, Object> attrMap = detailsLoader.loadDetails(id, type);
-		for (Map.Entry<String, Object> e : attrMap.entrySet()) {
+		Map<String, ?> attrMap = detailsLoader.loadDetails(id, type);
+		for (Map.Entry<String, ?> e : attrMap.entrySet()) {
 			httpRequest.setAttribute(e.getKey(), e.getValue());
 		}
 	}

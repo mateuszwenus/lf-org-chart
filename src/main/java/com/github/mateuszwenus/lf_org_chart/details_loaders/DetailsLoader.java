@@ -15,12 +15,13 @@ public class DetailsLoader {
 	private EnumMap<NodeType, SingleNodeDetailsLoader> loaders = new EnumMap<NodeType, SingleNodeDetailsLoader>(NodeType.class);
 
 	public DetailsLoader() {
-		for (SingleNodeDetailsLoader loader : Arrays.asList(new UserDetailsLoader())) {
+		for (SingleNodeDetailsLoader loader : Arrays.asList(new CommunityDetailsLoader(), new OrganisationDetailsLoader(),
+				new UserGroupDetailsLoader(), new TeamDetailsLoader(), new UserDetailsLoader())) {
 			loaders.put(loader.getSupportedNodeType(), loader);
 		}
 	}
 
-	public Map<String, Object> loadDetails(long nodeId, NodeType nodeType) {
+	public Map<String, ?> loadDetails(long nodeId, NodeType nodeType) {
 		try {
 			Preconditions.checkNotNull(nodeType);
 			SingleNodeDetailsLoader loader = loaders.get(nodeType);

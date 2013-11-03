@@ -6,17 +6,17 @@ import java.util.Map;
 import com.github.mateuszwenus.lf_org_chart.NodeType;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
-class UserDetailsLoader implements SingleNodeDetailsLoader {
+class OrganisationDetailsLoader implements SingleNodeDetailsLoader {
 
 	public NodeType getSupportedNodeType() {
-		return NodeType.USER;
+		return NodeType.ORGANISATION;
 	}
 
 	public Map<String, ?> loadDetails(long nodeId) throws PortalException, SystemException {
-		User user = UserLocalServiceUtil.getUser(nodeId);
-		return Collections.singletonMap("user", user);
+		Organization organization = OrganizationLocalServiceUtil.getOrganization(nodeId);
+		return Collections.singletonMap("organization", organization);
 	}
 }

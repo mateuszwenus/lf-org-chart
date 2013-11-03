@@ -86,8 +86,8 @@
 
 <table>
 	<tr>
-	<td style="width: 45%"><div id="<portlet:namespace />tree" style="min-height:100px;"></div></td>
+	<td style="width: 45%; vertical-align: top;"><div id="<portlet:namespace />tree" style="min-height:100px;"></div></td>
 	<td style="width: 5%"></td>
-	<td style="width: 50%"><div id="<portlet:namespace />nodeDetails"></div></td>
+	<td style="width: 50%; vertical-align: top;"><div id="<portlet:namespace />nodeDetails"></div></td>
 	</tr>
 </table>

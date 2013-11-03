@@ -9,5 +9,5 @@ import com.liferay.portal.kernel.exception.SystemException;
 interface SingleNodeDetailsLoader {
 
 	NodeType getSupportedNodeType();
-	Map<String, Object> loadDetails(long nodeId) throws PortalException, SystemException;
+	Map<String, ?> loadDetails(long nodeId) throws PortalException, SystemException;
 }
