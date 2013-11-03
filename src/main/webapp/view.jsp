@@ -39,8 +39,8 @@
     			ajax : {
     				data : function(data) {
     					return {
-    						id : data.attr("id"),
-    						type : data.attr("rel")
+    						"<portlet:namespace />id" : data.attr("id"),
+    						"<portlet:namespace />type" : data.attr("rel")
     					};
     				},
     				url : function(data) {

@@ -19,10 +19,11 @@ public class LoadNodeDetailsHandler {
 	private static final EnumSet<NodeType> NODES_WITH_DETAILS = EnumSet.of(NodeType.COMMUNITY, NodeType.ORGANISATION, NodeType.USER_GROUP,
 			NodeType.TEAM, NodeType.USER);
 	private DetailsLoader detailsLoader = new DetailsLoader();
-
+	private ParamsSupport paramsSupport = new ParamsSupport();
+	
 	public void handle(ResourceRequest req, ResourceResponse resp) throws IOException, PortletException {
-		Long id = getNodeId(req);
-		NodeType type = getNodeType(req);
+		Long id = paramsSupport.getNodeId(req);
+		NodeType type = paramsSupport.getNodeType(req);
 		HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(req));
 		if (validateParams(id, type)) {
 			addNodeDetailsAsAttributes(id, type, httpRequest);
@@ -44,22 +45,6 @@ public class LoadNodeDetailsHandler {
 		for (Map.Entry<String, Object> e : attrMap.entrySet()) {
 			httpRequest.setAttribute(e.getKey(), e.getValue());
 		}
-	}
-
-	private Long getNodeId(ResourceRequest req) {
-		String id = req.getParameter("id");
-		Long result = null;
-		if (id != null) {
-			try {
-				result = Long.parseLong(id);
-			} catch (NumberFormatException ignored) {
-			}
-		}
-		return result;
-	}
-
-	private NodeType getNodeType(ResourceRequest req) {
-		return NodeType.forString(req.getParameter("type"));
 	}
 
 	private RequestDispatcher getRequestDispatcher(HttpServletRequest httpRequest, NodeType type) {

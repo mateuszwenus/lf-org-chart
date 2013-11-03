@@ -8,24 +8,22 @@ import java.util.List;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.servlet.http.HttpServletRequest;
 
 import com.github.mateuszwenus.lf_org_chart.loaders.ChildrenLoader;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.liferay.portal.util.PortalUtil;
 
 public class LoadChildrenHandler {
 
 	private final Gson gson = new Gson();
 	private final ChildrenLoader childrenLoader = new ChildrenLoader();
+	private ParamsSupport paramsSupport = new ParamsSupport();
 	
 	public void handle(ResourceRequest req, ResourceResponse resp) throws IOException {
 		resp.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = resp.getWriter();
-		HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(req));
-		Long nodeId = getNodeId(httpRequest);
-		NodeType nodeType = getNodeType(httpRequest);
+		Long nodeId = paramsSupport.getNodeId(req);
+		NodeType nodeType = paramsSupport.getNodeType(req);
 		if (validateParams(nodeId, nodeType)) {
 			List<Node> nodes = childrenLoader.loadChildren(nodeType, nodeId, req);
 			sendResponse(nodes, out);
@@ -35,22 +33,6 @@ public class LoadChildrenHandler {
 		out.flush();
 	}
 	
-	private Long getNodeId(HttpServletRequest httpRequest) {
-		String id = httpRequest.getParameter("id");
-		Long result = null;
-		if (id != null) {
-			try {
-				result = Long.parseLong(id);
-			} catch (NumberFormatException ignored) {
-			}
-		}
-		return result;
-	}
-
-	private NodeType getNodeType(HttpServletRequest httpRequest) {
-		return NodeType.forString(httpRequest.getParameter("type"));
-	}
-
 	private boolean validateParams(Long nodeId, NodeType nodeType) {
 		return nodeType != null && (nodeId != null || !nodeType.isIdRequired());
 	}
