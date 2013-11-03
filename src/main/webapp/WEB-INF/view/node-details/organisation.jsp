@@ -3,6 +3,6 @@
 
 <h3>Organization details</h3>
 <aui:fieldset column="true">
-	<aui:field-wrapper label="organization-id">${organization.organizationId}&nbsp;</aui:field-wrapper>
-	<aui:field-wrapper label="organization-name">${organization.name}&nbsp;</aui:field-wrapper>
+	<aui:field-wrapper label="id">${organization.organizationId}&nbsp;</aui:field-wrapper>
+	<aui:field-wrapper label="name">${organization.name}&nbsp;</aui:field-wrapper>
 </aui:fieldset>

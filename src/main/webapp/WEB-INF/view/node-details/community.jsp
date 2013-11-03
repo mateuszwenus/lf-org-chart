@@ -3,6 +3,6 @@
 
 <h3>Community details</h3>
 <aui:fieldset column="true">
-	<aui:field-wrapper label="community-id">${community.groupId}&nbsp;</aui:field-wrapper>
-	<aui:field-wrapper label="community-name">${community.name}&nbsp;</aui:field-wrapper>
+	<aui:field-wrapper label="id">${community.groupId}&nbsp;</aui:field-wrapper>
+	<aui:field-wrapper label="name">${community.name}&nbsp;</aui:field-wrapper>
 </aui:fieldset>
