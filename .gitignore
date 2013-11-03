@@ -1,5 +1,5 @@
 .classpath
 .project
-deploy.sh
+*.sh
 /.settings
 /target
