@@ -6,7 +6,7 @@
 	<artifactId>lf-org-chart</artifactId>
 	<packaging>war</packaging>
 	<name>lf-org-chart Portlet</name>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<build>
 		<finalName>lf-org-chart</finalName>
 		<plugins>
