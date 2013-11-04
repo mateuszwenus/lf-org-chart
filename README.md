@@ -12,3 +12,8 @@ mvn clean package
 ```
 
 and copy lf-org-chart.war to deploy dir of your Liferay installation.
+
+License
+=======
+
+Lf-org-chart is licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php).
