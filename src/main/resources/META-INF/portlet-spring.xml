@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.github.mateuszwenus.lf_org_chart.service_builder.service.SessionCustomActionLocalService" class="com.github.mateuszwenus.lf_org_chart.service_builder.service.impl.SessionCustomActionLocalServiceImpl" />
+	<bean id="com.github.mateuszwenus.lf_org_chart.service_builder.service.SessionCustomActionLocalServiceUtil" class="com.github.mateuszwenus.lf_org_chart.service_builder.service.SessionCustomActionLocalServiceUtil">
+		<property name="service" ref="com.github.mateuszwenus.lf_org_chart.service_builder.service.SessionCustomActionLocalService" />
+	</bean>
+</beans>

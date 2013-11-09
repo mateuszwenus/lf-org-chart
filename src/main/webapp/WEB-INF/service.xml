@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_0_0.dtd">
+<service-builder package-path="com.github.mateuszwenus.lf_org_chart.service_builder">
+	<author>Mateusz Wenus</author>
+	<namespace>lf_org_chart</namespace>
+    <entity name="SessionCustomAction" local-service="true" remote-service="false"></entity>
+</service-builder>

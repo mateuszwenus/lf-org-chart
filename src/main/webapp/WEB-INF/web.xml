@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>com.liferay.portal.spring.context.PortletApplicationContext</param-value>
+	</context-param>
+
+	<!-- Listener that starts up the XmlWebApplicationContext IOC container 
+		(bean factory) -->
+	<listener>
+		<listener-class>com.liferay.portal.kernel.spring.context.PortletContextLoaderListener</listener-class>
+	</listener>
 </web-app>
