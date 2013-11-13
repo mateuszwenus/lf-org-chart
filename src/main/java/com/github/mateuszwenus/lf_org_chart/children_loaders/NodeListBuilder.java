@@ -1,4 +1,4 @@
-package com.github.mateuszwenus.lf_org_chart.loaders;
+package com.github.mateuszwenus.lf_org_chart.children_loaders;
 
 import java.util.ArrayList;
 import java.util.List;

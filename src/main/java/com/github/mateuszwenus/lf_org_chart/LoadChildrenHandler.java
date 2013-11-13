@@ -9,7 +9,7 @@ import java.util.List;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-import com.github.mateuszwenus.lf_org_chart.loaders.ChildrenLoader;
+import com.github.mateuszwenus.lf_org_chart.children_loaders.ChildrenLoader;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 

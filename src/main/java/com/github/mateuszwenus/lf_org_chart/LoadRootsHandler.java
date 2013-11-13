@@ -8,7 +8,7 @@ import java.util.List;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-import com.github.mateuszwenus.lf_org_chart.loaders.RootsLoader;
+import com.github.mateuszwenus.lf_org_chart.children_loaders.RootsLoader;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.liferay.portal.kernel.exception.SystemException;

@@ -1,4 +1,4 @@
-package com.github.mateuszwenus.lf_org_chart.loaders;
+package com.github.mateuszwenus.lf_org_chart.children_loaders;
 
 import com.github.mateuszwenus.lf_org_chart.Node;
 import com.github.mateuszwenus.lf_org_chart.NodeType;
