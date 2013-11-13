@@ -15,7 +15,7 @@ public class DetailsLoader {
 	private EnumMap<NodeType, SingleNodeDetailsLoader> loaders = new EnumMap<NodeType, SingleNodeDetailsLoader>(NodeType.class);
 
 	public DetailsLoader() {
-		for (SingleNodeDetailsLoader loader : Arrays.asList(new CommunityDetailsLoader(), new OrganisationDetailsLoader(),
+		for (SingleNodeDetailsLoader loader : Arrays.asList(new CommunityDetailsLoader(), new OrganizationDetailsLoader(),
 				new UserGroupDetailsLoader(), new TeamDetailsLoader(), new UserDetailsLoader())) {
 			loaders.put(loader.getSupportedNodeType(), loader);
 		}

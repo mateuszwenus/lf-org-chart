@@ -14,10 +14,10 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
-class OrganisationChildrenLoader implements SingleNodeChildrenLoader {
+class OrganizationChildrenLoader implements SingleNodeChildrenLoader {
 
 	public NodeType getSupportedNodeType() {
-		return NodeType.ORGANISATION;
+		return NodeType.ORGANIZATION;
 	}
 
 	public List<Node> loadChildren(Long nodeId, PortletRequest req) throws PortalException, SystemException {

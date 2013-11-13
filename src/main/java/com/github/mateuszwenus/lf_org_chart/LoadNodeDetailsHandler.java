@@ -16,7 +16,7 @@ import com.liferay.portal.util.PortalUtil;
 
 public class LoadNodeDetailsHandler {
 
-	private static final EnumSet<NodeType> NODES_WITH_DETAILS = EnumSet.of(NodeType.COMMUNITY, NodeType.ORGANISATION, NodeType.USER_GROUP,
+	private static final EnumSet<NodeType> NODES_WITH_DETAILS = EnumSet.of(NodeType.COMMUNITY, NodeType.ORGANIZATION, NodeType.USER_GROUP,
 			NodeType.TEAM, NodeType.USER);
 	private DetailsLoader detailsLoader = new DetailsLoader();
 	private ParamsSupport paramsSupport = new ParamsSupport();

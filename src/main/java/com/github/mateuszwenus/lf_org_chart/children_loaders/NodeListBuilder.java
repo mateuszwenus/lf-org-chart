@@ -32,7 +32,7 @@ class NodeListBuilder {
 	}
 	
 	public NodeListBuilder addOrganizations(List<Organization> organizations) {
-		nodes.addAll(Lists.transform(organizations, Transformations.ORGANISATION_TO_NODE));
+		nodes.addAll(Lists.transform(organizations, Transformations.ORGANIZATION_TO_NODE));
 		return this;
 	}
 	

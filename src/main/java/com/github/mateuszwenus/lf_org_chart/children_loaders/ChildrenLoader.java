@@ -18,7 +18,7 @@ public class ChildrenLoader {
 	private EnumMap<NodeType, SingleNodeChildrenLoader> loaders = new EnumMap<NodeType, SingleNodeChildrenLoader>(NodeType.class);
 
 	public ChildrenLoader() {
-		for (SingleNodeChildrenLoader loader : Arrays.asList(new CommunityChildrenLoader(), new OrganisationChildrenLoader(),
+		for (SingleNodeChildrenLoader loader : Arrays.asList(new CommunityChildrenLoader(), new OrganizationChildrenLoader(),
 				new TeamChildrenLoader(), new UserGroupChildrenLoader())) {
 			loaders.put(loader.getSupportedNodeType(), loader);
 		}

@@ -20,12 +20,12 @@ interface Transformations {
 		}
 	};
 
-	Function<Organization, Node> ORGANISATION_TO_NODE = new Function<Organization, Node>() {
+	Function<Organization, Node> ORGANIZATION_TO_NODE = new Function<Organization, Node>() {
 		public Node apply(Organization input) {
 			if (input == null) {
 				return null;
 			}
-			return Node.create(input.getPrimaryKey(), input.getName(), NodeType.ORGANISATION);
+			return Node.create(input.getPrimaryKey(), input.getName(), NodeType.ORGANIZATION);
 		}
 	};
 

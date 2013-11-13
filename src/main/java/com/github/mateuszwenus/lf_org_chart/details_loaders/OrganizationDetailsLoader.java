@@ -9,10 +9,10 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
-class OrganisationDetailsLoader implements SingleNodeDetailsLoader {
+class OrganizationDetailsLoader implements SingleNodeDetailsLoader {
 
 	public NodeType getSupportedNodeType() {
-		return NodeType.ORGANISATION;
+		return NodeType.ORGANIZATION;
 	}
 
 	public Map<String, ?> loadDetails(long nodeId) throws PortalException, SystemException {

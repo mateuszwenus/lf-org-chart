@@ -66,8 +66,8 @@
 	    		types : {
 	    			types : {
 	    				ROOT_COMMUNITIES : nodeType("database.png", [ "COMMUNITY" ]), 
-	    				COMMUNITY : nodeType("home.png", [ "ORGANISATION", "USER_GROUP", "TEAM", "USER" ]),
-	    				ORGANISATION : nodeType("sitemap.png", [ "ORGANISATION", "TEAM", "USER" ]),
+	    				COMMUNITY : nodeType("home.png", [ "ORGANIZATION", "USER_GROUP", "TEAM", "USER" ]),
+	    				ORGANIZATION : nodeType("sitemap.png", [ "ORGANIZATION", "TEAM", "USER" ]),
 	    				USER_GROUP : nodeType("customers.png", [ "USER" ]),
 	    				TEAM : nodeType("customers.png", [ "USER" ]),
 	    				USER : nodeType("user.png", [])
