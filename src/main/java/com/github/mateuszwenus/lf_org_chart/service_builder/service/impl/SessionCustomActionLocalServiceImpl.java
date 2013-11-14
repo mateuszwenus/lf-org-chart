@@ -43,7 +43,9 @@ public class SessionCustomActionLocalServiceImpl extends SessionCustomActionLoca
 		} catch (Exception e) {
 			throw handleException(e);
 		} finally {
-			sessionFactory.closeSession(session);
+			if (session != null) {
+				sessionFactory.closeSession(session);
+			}
 		}
 	}
 
